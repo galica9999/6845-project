@@ -1,3 +1,7 @@
 # comments-php-app
 
-A simple PHP application that hooks into a mysql db to store comments submitted by anonymous users.  It then shows those comments and allows for more to be added
+Steps to run application on your local PC.
+1. Perform a pull to download the code to your PC.
+2. Branch from main to make your changes
+3. If database is not already setup, go to createDatabaseScripts.txt.  Copy and paste
+the entire file into your MySQL admin console.  Change the username and password before executing script.

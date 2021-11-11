@@ -1,55 +1,45 @@
 <?php ob_start(); ?>
 <?php 
-require "./commentConfig.php";
+require "./config/databaseConfig.php";
 $lifetime = 60 * 60 * 24 * 2;
 ?>
 <?php
   if (isset($_POST['new-username'])) {
-    try {
-      $connection = new PDO($dsn, $username, $password, $options);
-
+    require "./databaseFunctions/accountFunctions.php";
+	try {
       $newUser =  str_replace(['"',"'"], "", $_POST['new-username']);
       $newPassword = $_POST['new-password'];
-
-      $sql = "INSERT INTO login VALUES ('$newUser', '$newPassword')";
-
-      $connection->exec($sql);
-      
-      setcookie('loggedIn', $newUser, time()+ 60*60*24*2,'/');
-      header('Location: ./index.php');
-      
+      $validateInd = validate_accountExists($newUser) ;
+	  add_account($newUser, $newPassword);
+	  if(!empty($validateInd)){
+		header('Location: ./index.php?loginError=accountExists');
+	  } else {
+		setcookie('loggedIn', $newUser, time()+ 60*60*24*2,'/');
+		header('Location: ./index.php');
+	  }
     }
     catch(PDOException $error) {
         echo $sql . "<br>" . $error->getMessage();
     }
   }
-
 ?>
 
 <?php
-
   if (isset($_POST['username'])) {
-    $postUser = $_POST["username"];
+    require "./databaseFunctions/accountFunctions.php";
+	$postUser = $_POST["username"];
     $postPassword  = $_POST['password'];
-    $sql =  "SELECT username, password FROM login WHERE username='$postUser'";;
-    try{
-        $connection = new PDO($dsn, $username, $password, $options);
         try{
-            $tables = $connection->query($sql);
-            $dbUser = $tables->fetch(PDO::FETCH_ASSOC);
-            if($dbUser['password'] == $postPassword){
-              
+			$validateInd = validate_account($postUser, $postPassword);
+			if(!empty($validateInd)){
                 setcookie('loggedIn', $postUser, time()+ 60*60*24*2,'/');
                 header('Location: ./index.php');
-                
+			} else {
+				header('Location: ./index.php?loginError=badAcccountPW');
             }
         }
         catch(PDOException $error) {
             echo $sql . "<br>" . $error->getMessage();
-        }
-    }
-    catch(PDOException $error) {
-        echo $sql . "<br>" . $error->getMessage();
         }
     }
 
@@ -59,7 +49,6 @@ $lifetime = 60 * 60 * 24 * 2;
       setcookie("loggedIn", '', time() - 60*60*24*2,'/');
       header("Location: index.php");
     }
-
     if (isset($_GET['logout'])) {
       logout();
     }
@@ -73,7 +62,7 @@ $lifetime = 60 * 60 * 24 * 2;
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Assignment 3</title>
+    <title>Community Volunteer Service Center</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="" />
