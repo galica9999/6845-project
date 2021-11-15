@@ -1,7 +1,8 @@
 <?php ob_start(); ?>
 <?php 
 require "./config/databaseConfig.php";
-$lifetime = 60 * 60 * 24 * 2;
+require "./databaseFunctions/cookieFunctions.php";
+//$lifetime = 60 * 60 * 24 * 2;
 ?>
 <?php
   if (isset($_POST['new-username'])) {
@@ -14,7 +15,7 @@ $lifetime = 60 * 60 * 24 * 2;
 	  if(!empty($validateInd)){
 		header('Location: ./index.php?loginError=accountExists');
 	  } else {
-		setcookie('loggedIn', $newUser, time()+ 60*60*24*2,'/');
+		setCookieData($validateInd);
 		header('Location: ./index.php');
 	  }
     }
@@ -27,14 +28,15 @@ $lifetime = 60 * 60 * 24 * 2;
 <?php
   if (isset($_POST['username'])) {
     require "./databaseFunctions/accountFunctions.php";
-	$postUser = $_POST["username"];
+	$postUser = $_POST['username'];
     $postPassword  = $_POST['password'];
         try{
 			$validateInd = validate_account($postUser, $postPassword);
 			if(!empty($validateInd)){
-                setcookie('loggedIn', $postUser, time()+ 60*60*24*2,'/');
-                header('Location: ./index.php');
+				setCookieData($validateInd);
+				header('Location: ./index.php');
 			} else {
+				echo 'failure';
 				header('Location: ./index.php?loginError=badAcccountPW');
             }
         }
@@ -63,6 +65,7 @@ $lifetime = 60 * 60 * 24 * 2;
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Community Volunteer Service Center</title>
+	<title>The Clean Roads Project</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="" />
@@ -80,31 +83,41 @@ $lifetime = 60 * 60 * 24 * 2;
       referrerpolicy="no-referrer"
     ></script>
   </head>
-  <body>
+  <body style="size:1040px;height:660px; background: url(./images/H58-road.gif)no-repeat; background-size: cover">
     <!--[if lt IE 7]>
       <p class="browsehappy">
         You are using an <strong>outdated</strong> browser. Please
         <a href="#">upgrade your browser</a> to improve your experience.
       </p>
     <![endif]-->
+	<header>
+	
+		<br><h1><center>The Clean Roads Project</center></h1>
+		<h2><center>Clean roads are safer roads!</center></h2><br>	
+	</header>
 
 
+    <!-- temporarly adding the below class so we can see the home and login link. Ask Ryan on how best to do this. -->
+	<div class="ui attached segment">
+		<div class="ui secondary pointing menu">
 
-    <div class="ui secondary pointing menu">
-      <a class="item">
-        Home
-      </a>
-      <div class="right menu">
-        <a class="ui item" href='./index.php?logout=true'>
-        <?php
-        if(!isset($_COOKIE['loggedIn'])) {
-          echo '';
-        }
-        else{
-          echo 'Logout';
-        }
-        ?>
-        </a>
-      </div>
-    </div>
+		
+
+		  <a class="item">
+			Home
+		  </a>
+		  <div class="right menu">
+			<a class="ui item" href='./index.php?logout=true'>
+			<?php
+			if(!isset($_COOKIE['loggedIn'])) {
+			  echo '';
+			}
+			else{
+			  echo 'Logout';
+			}
+			?>
+			</a>
+		  </div>
+		</div>
+	</div>
     <div class="ui container">

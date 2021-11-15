@@ -12,7 +12,7 @@ function get_accounts() {
 
 function validate_account($postUser, $postPassword) {
     global $db;
-    $query = 'SELECT accountID, username, accountType, firstName, lastName
+    $query = 'SELECT accountID, username, accountType, firstName, lastName, createDateTime, updateDateTime
 			  FROM accounts
               WHERE username = :username
               AND password = :password';
@@ -40,9 +40,9 @@ function validate_accountExists($username) {
 function add_account($username, $password) {
     global $db;
     $query = 'INSERT INTO accounts
-                 (username, password, accountType, firstName, lastName, createDateTime)
+                 (username, password, accountType, firstName, lastName, createDateTime, updateDateTime)
               VALUES
-                 (:username, :password, :accountType, :firstName, :lastName, now())';
+                 (:username, :password, :accountType, :firstName, :lastName, now(), now())';
     $statement = $db->prepare($query);
     $statement->bindValue(':username', $username);
     $statement->bindValue(':password', $password);
@@ -57,9 +57,9 @@ function update_account($username, $password, $accounType, $firstName, $lastName
     global $db;
     $query = 'UPDATE accounts
 	accountID, username, accountType, firstName, lastName
-                 (username, password, accountType, firstName, lastName, createDateTime)
+                 (username, password, accountType, firstName, lastName, createDateTime, updateDateTime)
               VALUES
-                 (:username, :password, :accountType, :firstName, :lastName, now())';
+                 (:username, :password, :accountType, :firstName, :lastName, now(), now())';
     $statement = $db->prepare($query);
     $statement->bindValue(':username', $username);
     $statement->bindValue(':password', $password);
