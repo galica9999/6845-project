@@ -91,11 +91,7 @@ require "./databaseFunctions/cookieFunctions.php";
         <a href="#">upgrade your browser</a> to improve your experience.
       </p>
     <![endif]-->
-	<header>
-	
-		<br><h1><center>The Clean Roads Project</center></h1>
-		<h2><center>Clean roads are safer roads!</center></h2><br>	
-	</header>
+
 
 
     <!-- temporarly adding the below class so we can see the home and login link. Ask Ryan on how best to do this. -->
@@ -121,4 +117,9 @@ require "./databaseFunctions/cookieFunctions.php";
 		  </div>
 		</div>
 	</div>
+  	<header>
+	
+		<br><h1><center>The Clean Roads Project</center></h1>
+		<h2><center>Clean roads are safer roads!</center></h2><br>	
+	</header>
     <div class="ui container">
