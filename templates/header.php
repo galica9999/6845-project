@@ -84,7 +84,7 @@ require "./databaseFunctions/cookieFunctions.php";
     ></script>
 
   </head>
-  <body style="size:1040px;height:660px; background: url(./images/H58-road.gif)no-repeat; background-size: cover">
+  <body style="size:1040px;height:660px; background: url(./images/H58-road.gif)no-repeat; background-size: cover; opacity: 0.5;">
     <!--[if lt IE 7]>
       <p class="browsehappy">
         You are using an <strong>outdated</strong> browser. Please
@@ -117,9 +117,13 @@ require "./databaseFunctions/cookieFunctions.php";
 		  </div>
 		</div>
 	</div>
-  	<header>
+ <div>
+  <img src="./images/H58-road.gif" alt="" style="height:100vh; width:100%; position:absolute;" z-index=-1>
+  <div style="background-color:rgba(0,0,0,.5); position:relative; height:100vh" z-index=2>
+  	<header z-index=3 style="position:relative;">
 	
 		<br><h1><center>The Clean Roads Project</center></h1>
 		<h2><center>Clean roads are safer roads!</center></h2><br>	
 	</header>
-    <div class="ui container">
+
+    <div class="ui container" style='position:relative'>
