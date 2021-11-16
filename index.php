@@ -1,7 +1,5 @@
 <?php include "templates/header.php";?>
 
-
-
 <?php 
 //debug 00webhosts databae connection
 //require "./databaseFunctions/accountFunctions.php";

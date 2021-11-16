@@ -68,7 +68,7 @@ require "./databaseFunctions/cookieFunctions.php";
 	<title>The Clean Roads Project</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
@@ -82,6 +82,7 @@ require "./databaseFunctions/cookieFunctions.php";
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+
   </head>
   <body style="size:1040px;height:660px; background: url(./images/H58-road.gif)no-repeat; background-size: cover">
     <!--[if lt IE 7]>
