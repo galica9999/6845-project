@@ -55,7 +55,7 @@
 			echo "
 			<div class='ui row'>
 					<div class='header column'>".$taskName."</div>"
-					."<div class='column'".$taskDateTime."</div>"
+					."<div class='column'>".$taskDateTime."</div>"
 					."<div class='column'>"
 					."<div class='ui grid two column row'>"
 					    ."<div class='column'>".$volunteersNeeded."</div>"
