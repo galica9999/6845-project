@@ -5,7 +5,9 @@ function get_tasks() {
     global $db;
     $query = 'SELECT tasks.taskID, tasks.taskName, tasks.taskDateTime,
 			  tasks.volunteersNeeded, tasks.volunteersMax,
-			  CASE WHEN taskassignment.taskID IS NULL THEN \'N\' ELSE \'Y\' END AS registered_ind
+			  CASE WHEN taskassignment.taskID IS NULL THEN \'N\' ELSE \'Y\' END AS registered_ind,
+              (SELECT COUNT(taskassignment.accountID) FROM taskassignment
+               WHERE taskassignment.taskID = tasks.taskID) currentlyEnrolled
     		  FROM tasks
 			  LEFT JOIN taskassignment
 			  ON tasks.taskID = taskassignment.taskID 

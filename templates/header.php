@@ -11,12 +11,18 @@ require "./databaseFunctions/cookieFunctions.php";
       $newUser =  str_replace(['"',"'"], "", $_POST['new-username']);
       $newPassword = $_POST['new-password'];
       $validateInd = validate_accountExists($newUser) ;
-	  add_account($newUser, $newPassword);
 	  if(!empty($validateInd)){
 		header('Location: ./index.php?loginError=accountExists');
 	  } else {
-		setCookieData($validateInd);
-		header('Location: ./index.php');
+		add_account($newUser, $newPassword);
+		$validateInd = validate_account($newUser, $newPassword);
+		if(!empty($validateInd)){
+			setCookieData($validateInd);
+			header('Location: ./index.php');
+		} else {
+			echo 'failure';
+			header('Location: ./index.php?loginError=newAccountError');
+		}
 	  }
     }
     catch(PDOException $error) {
@@ -84,7 +90,7 @@ require "./databaseFunctions/cookieFunctions.php";
     ></script>
 
   </head>
-  <body style="size:1040px;height:660px; background: url(./images/H58-road.gif)no-repeat; background-size: cover; opacity: 0.5;">
+  <body style="size:1040px;height:660px; background: url(./images/H58-road.gif)no-repeat; background-size: cover; opacity: 0.99;">
     <!--[if lt IE 7]>
       <p class="browsehappy">
         You are using an <strong>outdated</strong> browser. Please
