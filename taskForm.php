@@ -20,47 +20,78 @@ if (isset($taskID)) {
 ?>
 
 
-	<div class="ui bottom attached header">
-		<form class="ui form" name="createVolunteerTask" method='POST'>
-			<div class="inline fields">
-				<div >
-					<label><?php if (isset($taskID)) {echo 'Update task:';}  ?></label>
-					<input type="hidden" name='action' id="action" 
-					value="<?php if (isset($taskID)) {echo 'updateTask';} else {echo 'addTask';}  ?>"
-					>
-					
-					
-					
-					<?php if (isset($taskID)) {
-						echo '<input type="hidden" name="taskID" id="taskID" value="'.$taskID.'">'; 
-					}  ?>
-					
-					
-					
-					<input type="text" placeholder="Type task name here" name='taskName' id="taskName"
-					value="<?php if (isset($taskID)) {echo $taskName;}  ?>"
-					>
-					<input type="text" placeholder="Type task description here" name='taskDescription' id="taskDescription" 
-					value="<?php if (isset($taskID)) {echo $taskDescription;}  ?>"
-					>
-					<input type="datetime-local" placeholder="Type task date/time here" name='taskDateTime' id="taskDateTime"
-					value="<?php if (isset($taskID)) {echo date('Y-m-d\TH:i', strtotime($taskDateTime)); }  ?>"
-					>
-					<input type="text" placeholder="Type task location here" name='location' id="location"
-					value="<?php if (isset($taskID)) {echo $location;}  ?>"
-					>
-					<input type="text" placeholder="Type task volunteers needed here" name='volunteersNeeded' id="volunteersNeededvolunteersMax"
-					value="<?php if (isset($taskID)) {echo $volunteersNeeded;}  ?>"
-					>
-					<input type="number" placeholder="Type task volunteers max here" name='volunteersMax' id="volunteersMax"
-					value="<?php if (isset($taskID)) {echo $volunteersMax;}  ?>"
-					>
-					<label>Currently Enrolled: <?php if (isset($taskID)) {echo $currentlyEnrolled;} else {echo 0;}   ?></label>
-					 
-				</div>
-				<button class="ui primary button" name="submit" id="submit" type='submit'>
-				</button>
-			</div>
-		</form>
-	</div>
+<h3 class="ui top attached header">Volunteer Tasks</h3>
+<div class="ui attached segment">
+  <form class="ui form" name="createVolunteerTask" method="POST" _lpchecked="1">
+    <input type="hidden" name="action" id="action" value="addTask" />
+
+    <div class="field">
+      <label>Name:</label>
+      <input
+        type="text"
+        placeholder="Task name"
+        name="taskName"
+        id="taskName"
+        value=""
+      />
+    </div>
+
+    <div class="field">
+      <label>Description:</label>
+      <textarea
+        row="2"
+        placeholder="Description"
+        name="taskDescription"
+        id="taskDescription"
+      ></textarea>
+    </div>
+    <div class="field">
+      <label>Location:</label>
+      <input
+        type="text"
+        placeholder="Type task location here"
+        name="location"
+        id="location"
+        value=""
+      />
+    </div>
+
+    <div class="three fields">
+      <div class="field">
+        <label>Date/Time:</label>
+        <input
+          type="datetime-local"
+          placeholder="Type task date/time here"
+          name="taskDateTime"
+          id="taskDateTime"
+        />
+      </div>
+      <div class="field">
+        <label>Needed:</label>
+        <input
+          type="text"
+          placeholder="Type task volunteers needed here"
+          name="volunteersNeeded"
+          id="volunteersNeededvolunteersMax"
+          value=""
+        />
+      </div>
+      <div class="field">
+        <label>Max:</label>
+        <input
+          type="number"
+          placeholder="Type task volunteers max here"
+          name="volunteersMax"
+          id="volunteersMax"
+          value=""
+        />
+      </div>
+    </div>
+
+    <button class="ui primary button" name="submit" id="submit" type="submit">
+      Create
+    </button>
+  </form>
+</div>
+
 	
