@@ -22,18 +22,17 @@ password.addEventListener('change', (event) => {
 });
 
 //jquery listeners
+
 $('#register-form').change(function () {
-  $('#register-form').change(function () {
-    if (
-      $('#name').val() != '' &&
-      $('#username').val() != '' &&
-      $('#pasword').val() != '' &&
-      $('#verify-password').val() != '' &&
-      $('#password').val() == $('#verify-password').val()
-    ) {
-      $('#register').attr('disabled', false);
-    } else {
-      $('#register').attr('disabled', true);
-    }
-  });
+  if (
+    $('#name').val() != '' &&
+    $('#username').val() != '' &&
+    $('#pasword').val() != '' &&
+    $('#verify-password').val() != '' &&
+    $('#password').val() == $('#verify-password').val()
+  ) {
+    $('#register').attr('disabled', false);
+  } else {
+    $('#register').attr('disabled', true);
+  }
 });

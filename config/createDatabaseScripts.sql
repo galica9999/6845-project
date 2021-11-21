@@ -29,14 +29,26 @@ CREATE TABLE tasks (
   updateDateTime	DATETIME	NOT NULL	COMMENT 'When the record was last updated.',
   PRIMARY KEY (taskID)
 );
+--Trigger for records in taskassignment to be deleted if its parent record in tasks is deleted
+DROP TRIGGER IF EXISTS task_taskassignment_delete;
+DELIMITER $$  
+ 
+CREATE TRIGGER task_taskassignment_delete  
+AFTER DELETE  
+ON tasks FOR EACH ROW  
+BEGIN  
+  DELETE FROM taskassignment WHERE taskassignment.taskID = OLD.taskID;
+END$$   
+  
+DELIMITER ;  
 
 -- create the Tasks table
-CREATE TABLE taskAssignment (
+CREATE TABLE taskassignment (
   taskID			INT(11)		NOT NULL	COMMENT 'unique task id that user is registered for.',
   accountID			INT(11)		NOT NULL	COMMENT 'unique account id assigned to the task registered for'  ,
   createDateTime	DATETIME	NOT NULL	COMMENT 'When the record was first created.',
   updateDateTime	DATETIME	NOT NULL	COMMENT 'When the record was last updated.',
-  PRIMARY KEY (taskID)
+  PRIMARY KEY (taskID, accountID)
 );
 
 -- create the users and grant priveleges to those users
