@@ -20,7 +20,7 @@ if (isset($taskID)) {
 ?>
 
 
-<h3 class="ui top attached header">Volunteer Tasks</h3>
+<h3 class="ui top attached header">Create Task</h3>
 <div class="ui attached segment">
   <form class="ui form" name="createVolunteerTask" method="POST" _lpchecked="1">
     <input type="hidden" name="action" id="action" value="addTask" />
