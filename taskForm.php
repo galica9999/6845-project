@@ -19,12 +19,13 @@ if (isset($taskID)) {
 }
 ?>
 
-
-<h3 class="ui top attached header">Create Task</h3>
+<h3 class="ui top attached header"><?php if (isset($taskID)) {echo 'Update task:';} else {echo 'Create task:';} ?></h3>
 <div class="ui attached segment">
   <form class="ui form" name="createVolunteerTask" method="POST" _lpchecked="1">
-    <input type="hidden" name="action" id="action" value="addTask" />
-
+    <input type="hidden" name='action' id="action" value="updateTask">	
+    <?php if (isset($taskID)) {
+      echo '<input type="hidden" name="taskID" id="taskID" value="'.$taskID.'">'; 
+    }  ?>
     <div class="field">
       <label>Name:</label>
       <input
@@ -32,7 +33,8 @@ if (isset($taskID)) {
         placeholder="Task name"
         name="taskName"
         id="taskName"
-        value=""
+        required
+        value="<?php if (isset($taskID)) {echo $taskName;}  ?>"
       />
     </div>
 
@@ -43,7 +45,8 @@ if (isset($taskID)) {
         placeholder="Description"
         name="taskDescription"
         id="taskDescription"
-      ></textarea>
+        required
+      ><?php if (isset($taskID)) {echo $taskDescription;}  ?></textarea>
     </div>
     <div class="field">
       <label>Location:</label>
@@ -52,7 +55,8 @@ if (isset($taskID)) {
         placeholder="Type task location here"
         name="location"
         id="location"
-        value=""
+        required
+        value="<?php if (isset($taskID)) {echo $location;}  ?>"
       />
     </div>
 
@@ -63,7 +67,9 @@ if (isset($taskID)) {
           type="datetime-local"
           placeholder="Type task date/time here"
           name="taskDateTime"
+          required
           id="taskDateTime"
+          value="<?php if (isset($taskID)) {echo date('Y-m-d\TH:i', strtotime($taskDateTime)); }  ?>"
         />
       </div>
       <div class="field">
@@ -73,7 +79,8 @@ if (isset($taskID)) {
           placeholder="Type task volunteers needed here"
           name="volunteersNeeded"
           id="volunteersNeededvolunteersMax"
-          value=""
+          required
+          value="<?php if (isset($taskID)) {echo $volunteersNeeded;}  ?>"
         />
       </div>
       <div class="field">
@@ -83,15 +90,20 @@ if (isset($taskID)) {
           placeholder="Type task volunteers max here"
           name="volunteersMax"
           id="volunteersMax"
-          value=""
+          required
+          value="<?php if (isset($taskID)) {echo $volunteersMax;}  ?>"
         />
       </div>
     </div>
-
-    <button class="ui primary button" name="submit" id="submit" type="submit">
-      Create
-    </button>
+					
+    <label>Currently Enrolled: <?php if (isset($taskID)) {echo $currentlyEnrolled;} else {echo 0;}   ?></label>
+    <?php if (isset($taskID)) { ?>
+    <button class="ui primary button" name="updateSubmit" id="updateSubmit" type='submit'>Update Task</button>
+    <button class="ui primary button" name="deleteSubmit" id="deleteSubmit" type='submit'>Delete</button>	
+    <?php } else { ?>
+    <button class="ui primary button" name="createSubmit" id="createSubmit" type='submit'>Create Task</button>
+    <?php } ?>
+    
+    
   </form>
 </div>
-
-	

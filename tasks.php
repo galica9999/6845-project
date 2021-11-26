@@ -32,6 +32,7 @@
             $volunteersMax = $singleTask['volunteersMax'];
 			$strippedTaskName =  str_replace([' '," ",'-'], "", $taskName);
             $strippedTime = str_replace([':'," "], "", $taskDateTime);
+			$currentlyEnrolled = $singleTask['currentlyEnrolled'];
 			$registered_ind = $singleTask['registered_ind'];
 			if ($registered_ind == 'Y') {
 				$registrationURL = '<a class="ui red button" href=index.php?action=unregister&taskID='.$taskID.'>Unregister</a>';
@@ -50,16 +51,16 @@
 				$buttonLink=$registrationURL;
 			} else {
 				$buttonLink=$updateTaskURL;
-			}
-
+		}
 			echo "
 			<div class='ui row'>
 					<div class='header column'>".$taskName."</div>"
 					."<div class='column'>".$taskDateTime."</div>"
 					."<div class='column'>"
-					."<div class='ui grid two column row'>"
+					."<div class='ui grid three column row'>"
 					    ."<div class='column'>".$volunteersNeeded."</div>"
 					    ."<div class='column'>".$volunteersMax."</div>"
+						."<div class='column'>".$currentlyEnrolled."</div>"
 					."</div>"
 					."</div>"
 					."<div class='column'>".$buttonLink."</div>"
