@@ -95,9 +95,10 @@ if (isset($taskID)) {
         />
       </div>
     </div>
-					
-    <label>Currently Enrolled: <?php if (isset($taskID)) {echo $currentlyEnrolled;} else {echo 0;}   ?></label>
-    <?php if (isset($taskID)) { ?>
+	<div class="field">
+		<label>Currently Enrolled: <?php if (isset($taskID)) {echo $currentlyEnrolled;} else {echo 0;}   ?></label>
+	</div>				
+-    <?php if (isset($taskID)) { ?>
     <button class="ui primary button" name="updateSubmit" id="updateSubmit" type='submit'>Update Task</button>
     <button class="ui primary button" name="deleteSubmit" id="deleteSubmit" type='submit'>Delete</button>	
     <?php } else { ?>
