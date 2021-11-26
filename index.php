@@ -1,7 +1,5 @@
 <?php include "templates/header.php";?>
 
-
-
 <?php 
 //debug 00webhosts databae connection
 //require "./databaseFunctions/accountFunctions.php";
@@ -45,6 +43,30 @@ if(!isset($_COOKIE['loggedIn'])) {
 		case "taskForm":
 			include "./taskForm.php";
 			break;
+		// Update/Add/Delete Task
+		case "updateTask":
+			include "./databaseFunctions/taskAdminFunctions.php";
+			if (isset($_POST['createSubmit'])) {
+				if (isset($_POST['taskName'])) {
+					create_taskDetails($_POST['taskName'], $_POST['taskDescription'], $_POST['taskDateTime'], $_POST['location'], $_POST['volunteersNeeded'], $_POST['volunteersMax']);
+				} else {
+					echo 'need to add error handling';
+				}
+			} else if (isset($_POST['updateSubmit'])) {
+				if (isset($_POST['taskName'])) {
+					update_taskDetails($_POST['taskID'], $_POST['taskName'], $_POST['taskDescription'], $_POST['taskDateTime'], $_POST['location'], $_POST['volunteersNeeded'], $_POST['volunteersMax']);
+				} else {
+					echo 'need to add error handling';
+				}
+				include "./tasks.php";
+			} else if (isset($_POST['deleteSubmit'])) {
+				delete_taskDetails($taskID);
+			} else {
+				echo "Error: Form submitted with no button. This should never happen";				
+			}
+			header('Location: ./index.php');
+			break;
+		/*
 		case "addTask":
 			include "./databaseFunctions/taskAdminFunctions.php";
 			if (isset($_POST['taskName'])) {
@@ -68,7 +90,7 @@ if(!isset($_COOKIE['loggedIn'])) {
 			delete_taskDetails($taskID);
 			include "./tasks.php";
 			break;
-		
+		*/
 		// User registration
 		case "register":
 			include "./databaseFunctions/taskUserFunctions.php";
@@ -88,7 +110,7 @@ if(!isset($_COOKIE['loggedIn'])) {
 		case "updateAccount":
 			echo "updateAccount";
 			break;
-		
+
 		// Admins view to update/delete accounts. Maybe included in future version
 		case "userAdmin":
 			echo "userAdmin";

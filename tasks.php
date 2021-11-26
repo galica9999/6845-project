@@ -10,8 +10,7 @@
 		echo '<div class="ui attached segment"><a href=index.php?action=taskForm>Create Task</a></div>';
 	}  
 ?>	  
-      <div class="ui attached segment">
-        <div class="ui list celled large">
+      <div class="ui attached segment four column grid">
 
 
 <?php 
@@ -33,42 +32,39 @@
             $volunteersMax = $singleTask['volunteersMax'];
 			$strippedTaskName =  str_replace([' '," ",'-'], "", $taskName);
             $strippedTime = str_replace([':'," "], "", $taskDateTime);
+			$currentlyEnrolled = $singleTask['currentlyEnrolled'];
 			$registered_ind = $singleTask['registered_ind'];
 			if ($registered_ind == 'Y') {
-				$registrationURL = '<a href=index.php?action=unregister&taskID='.$taskID.'>UNREGISTER</a>';
+				$registrationURL = '<a class="ui red button" href=index.php?action=unregister&taskID='.$taskID.'>Unregister</a>';
 			} else {
-				$registrationURL = '<a href=index.php?action=register&taskID='.$taskID.'>REGISTER</a>';
+				$registrationURL = '<a class="ui green button" href=index.php?action=register&taskID='.$taskID.'>Register</a>';
 			}
 			if (getCookieData('accountType') == "admin") {
-				$updateTaskURL = '<a href=index.php?action=taskForm&taskID='.$taskID.'>EDIT THIS TASK</a>';
+				$updateTaskURL = '<a id="edit" class="ui primary button" href=index.php?action=taskForm&taskID='.$taskID.'>Edit</a>';
 			} else {
 				$updateTaskURL = '';
 			}
 
+			// to set the button link for editing or register/unregister based on admin status
+			$buttonLink = '';
+			if ($updateTaskURL==''){
+				$buttonLink=$registrationURL;
+			} else {
+				$buttonLink=$updateTaskURL;
+		}
 			echo "
-			<div class='item'>
-				<img class='ui avatar image' src='https://robohash.org/".$strippedTaskName.$strippedTime.".png'>
-				<div class='content'>
-					<div class='header'>"
-						.$taskName
-					."</div> Date of volunteer event: "
-					.$taskDateTime
-					." -  Volunteers Needed: "
-					.$volunteersNeeded 
-					." - Volunteers Max: "
-					.$volunteersMax
-					." - Task Id: "
-					.$taskID
-					." ----- <a href=index.php?action=deleteTask&taskID="
-					.$taskID
-					.">DELETE THIS TASK</a>"
-					." -----"
-					.$updateTaskURL
-					."-----"
-					.$registrationURL
-					."
-				</div>
-			</div>";
+			<div class='ui row'>
+					<div class='header column'>".$taskName."</div>"
+					."<div class='column'>".$taskDateTime."</div>"
+					."<div class='column'>"
+					."<div class='ui grid three column row'>"
+					    ."<div class='column'>".$volunteersNeeded."</div>"
+					    ."<div class='column'>".$volunteersMax."</div>"
+						."<div class='column'>".$currentlyEnrolled."</div>"
+					."</div>"
+					."</div>"
+					."<div class='column'>".$buttonLink."</div>"
+				."</div>";
           }
         }
     }
@@ -80,8 +76,27 @@
       echo $sql . "<br>" . $error->getMessage();
   }
 ?>
+		<div class="ui small modal transition hidden" id='edit-modal'>
+			<div class="header">Header</div>
+			<div class="content">
+				<p></p>
+			</div>
+			<div class="actions">
+				<div class="ui approve button">Approve</div>
+				<div class="ui button">Neutral</div>
+				<div class="ui cancel button">Cancel</div>
+			</div>
 		</div>
 	</div>
 	<br>
 	<br>
+
+
+
+
+
+
+
+
+
 

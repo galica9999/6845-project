@@ -11,12 +11,18 @@ require "./databaseFunctions/cookieFunctions.php";
       $newUser =  str_replace(['"',"'"], "", $_POST['new-username']);
       $newPassword = $_POST['new-password'];
       $validateInd = validate_accountExists($newUser) ;
-	  add_account($newUser, $newPassword);
 	  if(!empty($validateInd)){
 		header('Location: ./index.php?loginError=accountExists');
 	  } else {
-		setCookieData($validateInd);
-		header('Location: ./index.php');
+		add_account($newUser, $newPassword);
+		$validateInd = validate_account($newUser, $newPassword);
+		if(!empty($validateInd)){
+			setCookieData($validateInd);
+			header('Location: ./index.php');
+		} else {
+			echo 'failure';
+			header('Location: ./index.php?loginError=newAccountError');
+		}
 	  }
     }
     catch(PDOException $error) {
@@ -68,7 +74,7 @@ require "./databaseFunctions/cookieFunctions.php";
 	<title>The Clean Roads Project</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
@@ -82,19 +88,16 @@ require "./databaseFunctions/cookieFunctions.php";
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+
   </head>
-  <body style="size:1040px;height:660px; background: url(./images/H58-road.gif)no-repeat; background-size: cover">
+  <body style="size:1040px;height:660px; background: url(./images/H58-road.gif)no-repeat; background-size: cover; opacity: 0.99;">
     <!--[if lt IE 7]>
       <p class="browsehappy">
         You are using an <strong>outdated</strong> browser. Please
         <a href="#">upgrade your browser</a> to improve your experience.
       </p>
     <![endif]-->
-	<header>
-	
-		<br><h1><center>The Clean Roads Project</center></h1>
-		<h2><center>Clean roads are safer roads!</center></h2><br>	
-	</header>
+
 
 
     <!-- temporarly adding the below class so we can see the home and login link. Ask Ryan on how best to do this. -->
@@ -120,4 +123,13 @@ require "./databaseFunctions/cookieFunctions.php";
 		  </div>
 		</div>
 	</div>
-    <div class="ui container">
+ <div>
+  <img src="./images/H58-road.gif" alt="" style="height:100vh; width:100%; position:absolute;" z-index=-1>
+  <div style="background-color:rgba(0,0,0,.5); position:relative; height:100vh" z-index=2>
+  	<header z-index=3 style="position:relative;">
+	
+		<br><h1><center>The Clean Roads Project</center></h1>
+		<h2><center>Clean roads are safer roads!</center></h2><br>	
+	</header>
+
+    <div class="ui container" style='position:relative'>
