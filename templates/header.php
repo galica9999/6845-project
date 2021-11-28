@@ -106,8 +106,9 @@ require "./databaseFunctions/cookieFunctions.php";
 
 		
 
-		  <a class="item">
-			Home
+		  <a class="left menu">
+			<a href='./index.php'><img src="./images/CG2.png" alt="Cleaner & Greener Image file" height="033" width="133"/></a>
+			<a class="ui item" href='./index.php'>Home</a>
 		  </a>
 		  <div class="right menu">
 			<a class="ui item" href='./index.php?logout=true'>

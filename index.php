@@ -66,31 +66,6 @@ if(!isset($_COOKIE['loggedIn'])) {
 			}
 			header('Location: ./index.php');
 			break;
-		/*
-		case "addTask":
-			include "./databaseFunctions/taskAdminFunctions.php";
-			if (isset($_POST['taskName'])) {
-				create_taskDetails($_POST['taskName'], $_POST['taskDescription'], $_POST['taskDateTime'], $_POST['location'], $_POST['volunteersNeeded'], $_POST['volunteersMax']);
-			} else {
-				echo 'need to add error handling';
-			}
-			header('Location: ./index.php');
-			break;
-		case "updateTask":
-			include "./databaseFunctions/taskAdminFunctions.php";
-			if (isset($_POST['taskName'])) {
-				update_taskDetails($_POST['taskID'], $_POST['taskName'], $_POST['taskDescription'], $_POST['taskDateTime'], $_POST['location'], $_POST['volunteersNeeded'], $_POST['volunteersMax']);
-			} else {
-				echo 'need to add error handling';
-			}
-			include "./tasks.php";
-			break;
-		case "deleteTask":
-			include "./databaseFunctions/taskAdminFunctions.php";
-			delete_taskDetails($taskID);
-			include "./tasks.php";
-			break;
-		*/
 		// User registration
 		case "register":
 			include "./databaseFunctions/taskUserFunctions.php";
@@ -102,7 +77,13 @@ if(!isset($_COOKIE['loggedIn'])) {
 			unregister_task($taskID);
 			include "./tasks.php";
 			break;
-		
+	
+
+		// About Us action. 
+		case "aboutUs":
+			include "./aboutUs.php";
+			break;
+	
 		// User Profile actions. Maybe included in future version
 		case "userProfile":
 			echo "userProfile";
