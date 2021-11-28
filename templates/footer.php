@@ -1,15 +1,28 @@
-
-
-
-<!-- This file needs a footer design -->
-
-<footer style='position:relative;'>
-    <p class="copyright">
-        &copy; <?php echo date("Y"); ?> ICTN 6845 - Project Team 1
-    </p>
-</footer>
+	</div>
 </div>
+</div>
+<!-- Style used to force footer to always display -->
+<style>
+<!--	   bottom:0; -->
+	#footer {
+	   position:absolute;
+
+	   width:100%;
+	   height:60px;   /* Height of the footer */
+	   background:#6cf;
+	}
+</style>
+<div id="footer">
+	<div class="ui attached segment">
+		<div class="ui secondary pointing menu">
+			Cleaner & Greener inc.<br>
+			1 Clean Way | Greenville, NC 27858
+		  <div class="right menu">
+			&copy; <?php echo date("Y"); ?> &nbsp;| &nbsp;
+			<a  href='index.php?action=aboutUs'>About Us</a> &nbsp;| &nbsp;
+		  </div>
+		</div>
+	</div>
 </div>
 </body>
 </html>
-
