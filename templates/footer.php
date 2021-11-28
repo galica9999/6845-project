@@ -19,7 +19,7 @@
 			1 Clean Way | Greenville, NC 27858
 		  <div class="right menu">
 			&copy; <?php echo date("Y"); ?> &nbsp;| &nbsp;
-			<a  href='index.php?action=aboutUs'>About Us</a> &nbsp;| &nbsp;
+			<a  href='index.php?action=aboutUs'>About Us</a> &nbsp; &nbsp;
 		  </div>
 		</div>
 	</div>

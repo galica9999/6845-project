@@ -10,11 +10,12 @@ require "./databaseFunctions/cookieFunctions.php";
 	try {
       $newUser =  str_replace(['"',"'"], "", $_POST['new-username']);
       $newPassword = $_POST['new-password'];
+	  $newName = $_POST['new-name'];
       $validateInd = validate_accountExists($newUser) ;
 	  if(!empty($validateInd)){
 		header('Location: ./index.php?loginError=accountExists');
 	  } else {
-		add_account($newUser, $newPassword);
+		add_account($newUser, $newPassword, $newName);
 		$validateInd = validate_account($newUser, $newPassword);
 		if(!empty($validateInd)){
 			setCookieData($validateInd);
@@ -52,7 +53,7 @@ require "./databaseFunctions/cookieFunctions.php";
     }
 
 ?>
-  <?php
+<?php
     function logout() {
       setcookie("loggedIn", '', time() - 60*60*24*2,'/');
       header("Location: index.php");
@@ -61,6 +62,8 @@ require "./databaseFunctions/cookieFunctions.php";
       logout();
     }
 ?>
+
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -111,13 +114,19 @@ require "./databaseFunctions/cookieFunctions.php";
 			<a class="ui item" href='./index.php'>Home</a>
 		  </a>
 		  <div class="right menu">
+			<a class="ui item" href='./index.php?action=userProfile'>
+			<?php
+				echo 'Hi, &nbsp;';
+				echo getCookieData('name');
+			?>
+			</a>
 			<a class="ui item" href='./index.php?logout=true'>
 			<?php
 			if(!isset($_COOKIE['loggedIn'])) {
 			  echo '';
 			}
 			else{
-			  echo 'Logout';
+			  echo '(Logout)';  
 			}
 			?>
 			</a>

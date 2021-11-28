@@ -12,7 +12,7 @@ function get_accounts() {
 
 function validate_account($postUser, $postPassword) {
     global $db;
-    $query = 'SELECT accountID, username, accountType, firstName, lastName, createDateTime, updateDateTime
+    $query = 'SELECT accountID, username, accountType, name, createDateTime, updateDateTime
 			  FROM accounts
               WHERE username = :username
               AND password = :password';
@@ -37,35 +37,31 @@ function validate_accountExists($username) {
     return $validateInd;
 }
 
-function add_account($username, $password) {
+function add_account($username, $password, $name) {
     global $db;
     $query = 'INSERT INTO accounts
-                 (username, password, accountType, firstName, lastName, createDateTime, updateDateTime)
+                 (username, password, accountType, name, createDateTime, updateDateTime)
               VALUES
-                 (:username, :password, :accountType, :firstName, :lastName, now(), now())';
+                 (:username, :password, :accountType, :name, now(), now())';
     $statement = $db->prepare($query);
     $statement->bindValue(':username', $username);
     $statement->bindValue(':password', $password);
     $statement->bindValue(':accountType', 'user');
-    $statement->bindValue(':firstName', 'Future version');
-    $statement->bindValue(':lastName', 'Future version');
+    $statement->bindValue(':name', $name);
     $statement->execute();
     $statement->closeCursor();
 }
 
-function update_account($username, $password, $accounType, $firstName, $lastName) {
+function update_account($username, $password, $accounType, $name) {
     global $db;
     $query = 'UPDATE accounts
-	accountID, username, accountType, firstName, lastName
-                 (username, password, accountType, firstName, lastName, createDateTime, updateDateTime)
-              VALUES
-                 (:username, :password, :accountType, :firstName, :lastName, now(), now())';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':username', $username);
-    $statement->bindValue(':password', $password);
-    $statement->bindValue(':accountType', $accounType);
-    $statement->bindValue(':firstName', $firstName);
-    $statement->bindValue(':lastName', $lastName);
+				SET
+				name=:name
+				updateDateTime=now()
+              WHERE accountID=:accountID';   
+	$statement = $db->prepare($query);
+    $statement->bindValue(':accountID', $accountID);
+    $statement->bindValue(':name', $name);
     $statement->execute();
     $statement->closeCursor();
 }
