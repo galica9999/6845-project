@@ -15,8 +15,9 @@
 <div id="footer">
 	<div class="ui attached segment">
 		<div class="ui secondary pointing menu">
-			Cleaner & Greener inc.<br>
+			Cleaner & Greener Inc.<br>
 			1 Clean Way | Greenville, NC 27858
+			(555) 747-8837
 		  <div class="right menu">
 			&copy; <?php echo date("Y"); ?> &nbsp;| &nbsp;
 			<a  href='index.php?action=aboutUs'>About Us</a> &nbsp; &nbsp;
