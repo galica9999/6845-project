@@ -13,6 +13,18 @@
       <div class="ui attached segment four column grid">
 
 
+			<div class='ui row'>
+					<div class='header column'><strong>Event name</strong></div>
+					<div class='column'><strong>Date</strong></div>
+					<div class='column'>
+					<div class='ui grid three column row'>
+					    <div class='column'><strong>Needed</strong></div>
+					    <div class='column'><strong>Max</strong></div>
+						<div class='column'><strong>Enrolled</strong></div>
+					</div>
+					</div>
+					<div class='column'></div>
+				</div>
 <?php 
 		
 					
@@ -33,6 +45,7 @@
 			$strippedTaskName =  str_replace([' '," ",'-'], "", $taskName);
             $strippedTime = str_replace([':'," "], "", $taskDateTime);
 			$currentlyEnrolled = $singleTask['currentlyEnrolled'];
+			$taskDescription = $singleTask['taskDescription'];	
 			$registered_ind = $singleTask['registered_ind'];
 			if ($registered_ind == 'Y') {
 				$registrationURL = '<a class="ui red button" href=index.php?action=unregister&taskID='.$taskID.'>Unregister</a>';
@@ -54,7 +67,10 @@
 		}
 			echo "
 			<div class='ui row'>
-					<div class='header column'>".$taskName."</div>"
+					<div class='header column' data-tooltip=".$taskDescription." data-position='top left'>".$taskName."</div>"
+					
+					
+		
 					."<div class='column'>".$taskDateTime."</div>"
 					."<div class='column'>"
 					."<div class='ui grid three column row'>"
@@ -64,6 +80,9 @@
 					."</div>"
 					."</div>"
 					."<div class='column'>".$buttonLink."</div>"
+					
+				
+					
 				."</div>";
           }
         }

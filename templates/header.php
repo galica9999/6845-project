@@ -93,7 +93,8 @@ require "./databaseFunctions/cookieFunctions.php";
     ></script>
 
   </head>
-  <body style="size:1040px;height:660px; background: url(./images/H58-road.gif)no-repeat; background-size: cover; opacity: 0.99;">
+  <body style="height:100vh;width:100%; background: url(./images/H58-road.gif);  opacity: 0.99;">
+  
     <!--[if lt IE 7]>
       <p class="browsehappy">
         You are using an <strong>outdated</strong> browser. Please

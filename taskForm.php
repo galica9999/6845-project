@@ -19,7 +19,10 @@ if (isset($taskID)) {
 }
 ?>
 
-<h3 class="ui top attached header"><?php if (isset($taskID)) {echo 'Update task:';} else {echo 'Create task:';} ?></h3>
+
+<div class="ui top attached header" style="display:flex; justify-content:space-between;"><?php if (isset($taskID)) {echo 'Update task:';} else {echo 'Create task:';} ?> <a href="./index.php"><i class="close icon"></i></a></div>
+
+</h3>
 <div class="ui attached segment">
   <form class="ui form" name="createVolunteerTask" method="POST" _lpchecked="1">
     <input type="hidden" name='action' id="action" value="updateTask">	
