@@ -40,6 +40,7 @@
             $taskID = $singleTask['taskID'];
             $taskName = $singleTask['taskName'];            
             $taskDateTime = $singleTask['taskDateTime'];
+            $taskDateTimeFormated = date_format(new DateTime($taskDateTime),"m/d/Y h:i a");
             $volunteersNeeded = $singleTask['volunteersNeeded'];
             $volunteersMax = $singleTask['volunteersMax'];
 			$strippedTaskName =  str_replace([' '," ",'-'], "", $taskName);
@@ -68,10 +69,7 @@
 			echo "
 			<div class='ui row'>
 					<div class='header column' data-tooltip=".$taskDescription." data-position='top left'>".$taskName."</div>"
-					
-					
-		
-					."<div class='column'>".$taskDateTime."</div>"
+					."<div class='column'>".$taskDateTimeFormated."</div>"
 					."<div class='column'>"
 					."<div class='ui grid three column row'>"
 					    ."<div class='column'>".$volunteersNeeded."</div>"
@@ -94,7 +92,7 @@
   catch(PDOException $error) {
       echo $sql . "<br>" . $error->getMessage();
   }
-?>
+ ?> 
 		<div class="ui small modal transition hidden" id='edit-modal'>
 			<div class="header">Header</div>
 			<div class="content">
@@ -108,14 +106,7 @@
 		</div>
 	</div>
 	<br>
-	<br>
 
 
 
-
-
-
-
-
-
-
+	
