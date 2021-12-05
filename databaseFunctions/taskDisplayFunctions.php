@@ -4,7 +4,7 @@
 function get_tasks() {
     global $db;
     $query = 'SELECT tasks.taskID, tasks.taskName, tasks.taskDateTime, tasks.taskDescription,
-			  tasks.volunteersNeeded, tasks.volunteersMax,
+			  tasks.volunteersNeeded, tasks.volunteersMax, tasks.location,
 			  CASE WHEN taskassignment.taskID IS NULL THEN \'N\' ELSE \'Y\' END AS registered_ind,
               (SELECT COUNT(taskassignment.accountID) FROM taskassignment
                WHERE taskassignment.taskID = tasks.taskID) currentlyEnrolled

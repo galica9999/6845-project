@@ -3,7 +3,6 @@
 ?>
 
       <h3 class="ui top attached header">Volunteer Tasks</h3>
-	  <!-- Temporary location until team decides where to put it -->
 	  
 <?php 
 	if (getCookieData('accountType') == "admin") {
@@ -14,8 +13,8 @@
 
 
 			<div class='ui row'>
-					<div class='header column'><strong>Event name</strong></div>
-					<div class='column'><strong>Date</strong></div>
+					<div class='column' style='width:10%;'><strong>Date</strong></div>
+					<div class='column' style='width:40%;'><strong>Event name</strong></div>
 					<div class='column'>
 					<div class='ui grid three column row'>
 					    <div class='column'><strong>Needed</strong></div>
@@ -23,14 +22,9 @@
 						<div class='column'><strong>Enrolled</strong></div>
 					</div>
 					</div>
-					<div class='column'></div>
+					<div class='column'><strong>Registration Status</strong></div>
 				</div>
 <?php 
-		
-					
-			
-
-
   try {
 
     try {
@@ -41,7 +35,8 @@
             $taskName = $singleTask['taskName'];            
             $taskDateTime = $singleTask['taskDateTime'];
             $taskDateTimeFormated = date_format(new DateTime($taskDateTime),"m/d/Y h:i a");
-            $volunteersNeeded = $singleTask['volunteersNeeded'];
+            $taskLocation = $singleTask['location'];
+			$volunteersNeeded = $singleTask['volunteersNeeded'];
             $volunteersMax = $singleTask['volunteersMax'];
 			$strippedTaskName =  str_replace([' '," ",'-'], "", $taskName);
             $strippedTime = str_replace([':'," "], "", $taskDateTime);
@@ -68,20 +63,39 @@
 		}
 			echo "
 			<div class='ui row'>
-					<div class='header column' data-tooltip=".$taskDescription." data-position='top left'>".$taskName."</div>"
-					."<div class='column'>".$taskDateTimeFormated."</div>"
-					."<div class='column'>"
-					."<div class='ui grid three column row'>"
-					    ."<div class='column'>".$volunteersNeeded."</div>"
-					    ."<div class='column'>".$volunteersMax."</div>"
-						."<div class='column'>".$currentlyEnrolled."</div>"
+			
+				
+
+			
+					<div class='column' style='width:10%;height:64px' >"
+							."<div class='column'><h3>".date_format(new DateTime($taskDateTimeFormated),"d")."</h3></div>"
+							."<div class='column'>".date_format(new DateTime($taskDateTimeFormated),"M Y")."</div>"
+							."<div class='column'>".date_format(new DateTime($taskDateTimeFormated),"h:i a")."</div>"
+					."</div>"		
+			
+			
+			
+					."<div class='column' style='width:40%;' >"
+						."<div class='column'><b>".$taskName."</b></div>"
+						."<div class='column'> Location: ".$taskLocation."</div>"
+						."<div class='column'> Description: ".$taskDescription."</div>"
 					."</div>"
+
+					
+				
+					
+					."<div class='column'>"
+						."<div class='ui grid three column row'>"
+							."<div class='column'>".$volunteersNeeded."</div>"
+							."<div class='column'>".$volunteersMax."</div>"
+							."<div class='column'>".$currentlyEnrolled."</div>"
+						."</div>"
 					."</div>"
 					."<div class='column'>".$buttonLink."</div>"
 					
 				
 					
-				."</div>";
+			."</div>";
           }
         } 
     }
@@ -93,6 +107,7 @@
       echo $sql . "<br>" . $error->getMessage();
   }
  ?> 
+
 		<div class="ui small modal transition hidden" id='edit-modal'>
 			<div class="header">Header</div>
 			<div class="content">
