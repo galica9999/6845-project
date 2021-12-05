@@ -18,7 +18,7 @@ if (filter_input(INPUT_POST, 'taskID') !== NULL) {
 // If user isn't logged in then default to login page
 if (isset($action) && $action == "aboutUs") {
 	include "./aboutUs.php";
-
+ 
 } elseif (!isset($_COOKIE['loggedIn'])) {
   include "./login.php";	
 	

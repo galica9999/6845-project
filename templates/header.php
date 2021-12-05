@@ -142,3 +142,4 @@ require "./databaseFunctions/cookieFunctions.php";
 		<h2><center><font color="white">Clean roads are safer roads!</font></center></h2>	
 	</header>
 
+ 
