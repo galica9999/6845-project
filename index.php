@@ -1,17 +1,6 @@
 <?php include "templates/header.php";?>
 
 <?php 
-//debug 00webhosts databae connection
-//require "./databaseFunctions/accountFunctions.php";
-//$validateInd = get_accounts();
-//if (isset($validateInd)) {$test = 'yes' ;} else {$test = 'no';}
-//echo $test;
-//foreach($validateInd as $singleTask){	
-//            $username = $singleTask['username'];
-//}
-//echo $username;
-//echo 'data should be above';
-
 
 //convert form/get scope variable to local variable
 if (filter_input(INPUT_POST, 'action') !== NULL) {
@@ -27,9 +16,12 @@ if (filter_input(INPUT_POST, 'taskID') !== NULL) {
 }
 
 // If user isn't logged in then default to login page
-if(!isset($_COOKIE['loggedIn'])) {
-  include "./login.php";
+if (isset($action) && $action == "aboutUs") {
+	include "./aboutUs.php";
 
+} elseif (!isset($_COOKIE['loggedIn'])) {
+  include "./login.php";	
+	
 // If user is logged in, then if an action variable exists then perform the action
 } elseif (isset($action)) {
 	switch ($action) {

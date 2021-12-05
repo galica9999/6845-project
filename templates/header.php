@@ -93,7 +93,9 @@ require "./databaseFunctions/cookieFunctions.php";
     ></script>
 
   </head>
-  <body style="height:100vh;width:100%; background: url(./images/H58-road.gif);  opacity: 0.99;">
+  <body >
+  <!--style="height:100vh;width:100%; background: url(./images/H58-road.gif);  opacity: 0.99;" -->
+  
   
     <!--[if lt IE 7]>
       <p class="browsehappy">
@@ -116,31 +118,27 @@ require "./databaseFunctions/cookieFunctions.php";
 		  </a>
 		  <div class="right menu">
 			<a class="ui item" href='./index.php?action=userProfile'>
-			<?php
-				echo 'Hi, &nbsp;';
-				echo getCookieData('name');
-			?>
+
 			</a>
-			<a class="ui item" href='./index.php?logout=true'>
+
 			<?php
 			if(!isset($_COOKIE['loggedIn'])) {
 			  echo '';
 			}
 			else{
-			  echo '(Logout)';  
+				echo '<div class="ui item">Hi, &nbsp;'.getCookieData('name').'</div>';
+				echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="ui item" href="./index.php?logout=true">(Logout)</a>';  
 			}
 			?>
-			</a>
 		  </div>
 		</div>
 	</div>
  <div>
-  <img src="./images/H58-road.gif" alt="" style="height:100vh; width:100%; position:absolute;" z-index=-1>
-  <div style="background-color:rgba(0,0,0,.5); position:relative; height:100vh" z-index=2>
+  <img src="./images/H58-road.gif" alt="" style="height:100vh; width:100%; position:absolute;" z-index=-1> 
+  <div style="background-color:rgba(0,0,0,.60); position:relative; height:100vh" z-index=2>
   	<header z-index=3 style="position:relative;">
 	
-		<br><h1><center>The Clean Roads Project</center></h1>
-		<h2><center>Clean roads are safer roads!</center></h2><br>	
+		<br><h1><center><font color="white">The Clean Roads Project</font></center></h1>
+		<h2><center><font color="white">Clean roads are safer roads!</font></center></h2>	
 	</header>
 
-    <div class="ui container" style='position:relative'>
