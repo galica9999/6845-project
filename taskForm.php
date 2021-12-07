@@ -16,6 +16,7 @@ if (isset($taskID)) {
 		$strippedTaskName =  str_replace([' '," ",'-'], "", $taskName);
 		$strippedTime = str_replace([':'," "], "", $taskDateTime);
 	}
+	
 }
 ?>
 
@@ -100,7 +101,32 @@ if (isset($taskID)) {
     </div>
 	<div class="field">
 		<label>Currently Enrolled: <?php if (isset($taskID)) {echo $currentlyEnrolled;} else {echo 0;}   ?></label>
-	</div>				
+	</div>		
+
+<?php
+	echo "<div class='ui attached segment two column grid'>
+			<div class='ui row'>
+				<div class='column' style='width:30%;'><strong>Event member</strong></div>
+				<div class='column' style='width:70%;'><strong>Registered On</strong></div>
+			</div>
+		 ";
+if (isset($taskID)) {
+	$taskMembers = get_taskMembers($taskID);
+	foreach($taskMembers as $singleMember){	
+		$taskID = $singleMember['taskID'];
+		$memberName = $singleMember['name'];  
+		$memberSignUpDate = $singleMember['registeredOn']; 	
+        $memberSignUpDateFormated = date_format(new DateTime($memberSignUpDate),"m/d/Y h:i a");
+	echo "
+		
+		<div class='ui row'>
+			<div class='column' style='width:30%;'>".$memberName."</div>
+			<div class='column' style='width:70%;'>".$memberSignUpDateFormated."</div>
+		</div>";
+	}
+	echo "</div><br>";
+}
+?>	
     <?php if (isset($taskID)) { ?>
     <button class="ui primary button" name="updateSubmit" id="updateSubmit" type='submit'>Update Task</button>
     <button class="ui primary button" name="deleteSubmit" id="deleteSubmit" type='submit'>Delete</button>	

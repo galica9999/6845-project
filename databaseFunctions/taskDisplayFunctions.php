@@ -38,4 +38,20 @@ function get_tasksDetails($taskID) {
 	return $taskDetails;
 }
 
+function get_taskMembers($taskID) {
+    global $db;
+    $query = 'SELECT taskassignment.taskID, taskassignment.accountID, taskassignment.createDateTime as registeredOn,
+			  accounts.name
+			  FROM taskassignment
+			  INNER JOIN accounts
+			  ON taskassignment.accountID = accounts.accountID
+			  WHERE taskassignment.taskID = :taskID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':taskID', $taskID);
+    $statement->execute();
+    $taskDetails = $statement->fetchAll();
+    $statement->closeCursor();
+	return $taskDetails;
+}		  
+			  
 ?>
